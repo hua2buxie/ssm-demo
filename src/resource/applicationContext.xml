@@ -43,7 +43,6 @@
 		<property name="basePackage" value="com.levi.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
-	
 	<!-- - - - - - - spring 声明式事务 - - - - - - - -->
 	<!-- 配置事务管理器 -->
 	<bean id="transactionManager"
@@ -58,6 +57,7 @@
 		<aop:pointcut id="targetMethod" expression="execution(* com.levi.service.*.*(..))" />
 		<aop:advisor pointcut-ref="targetMethod"  advice-ref="transactionAdvice"/>
 	</aop:config>
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="save*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
 				<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
